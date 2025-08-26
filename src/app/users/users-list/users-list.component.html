@@ -1,0 +1,72 @@
+<div class="toolbar">
+  <mat-form-field appearance="outline">
+    <mat-label>Search users</mat-label>
+    <input
+      matInput
+      [(ngModel)]="q"
+      (keyup)="applyFilter()"
+      placeholder="Search by name or email"
+    />
+  </mat-form-field>
+
+  <div class="spacer"></div>
+
+  <button mat-raised-button color="primary" (click)="openCreate()">
+    <mat-icon>person_add</mat-icon>
+    Add User
+  </button>
+</div>
+
+<div class="fullwidth">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Avatar -->
+    <ng-container matColumnDef="avatar">
+      <th mat-header-cell *matHeaderCellDef>Avatar</th>
+      <td mat-cell *matCellDef="let user">
+        <img [src]="user.avatar" class="avatar" alt="avatar" />
+      </td>
+    </ng-container>
+
+    <!-- Name -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let user">
+        {{ user.first_name }} {{ user.last_name }}
+      </td>
+    </ng-container>
+
+    <!-- Email -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-button color="primary" (click)="view(user)">
+          <mat-icon>visibility</mat-icon> View
+        </button>
+        <button mat-button color="accent" (click)="openEdit(user)">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+        <button mat-button color="warn" (click)="del(user)">
+          <mat-icon>delete</mat-icon> Delete
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="totalUsers"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[3, 6, 12]"
+    showFirstLastButtons
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>

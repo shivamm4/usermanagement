@@ -1,0 +1,51 @@
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Spacer for pushing items to right */
+.spacer {
+  flex: 1;
+}
+
+/* Table Wrapper */
+.fullwidth {
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Avatar Images */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+}
+
+/* Paginator */
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Table Styling */
+.mat-header-cell {
+  font-weight: 600;
+  font-size: 14px;
+  background: #f9f9f9;
+}
+
+.mat-row:hover {
+  background: #fafafa;
+  transition: background 0.2s ease;
+}
+

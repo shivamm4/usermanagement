@@ -1,0 +1,13 @@
+<nav class="navbar">
+  <div class="logo">MyApp</div>
+
+  <div class="nav-links">
+    <button mat-button routerLink="/signup" *ngIf="!isLoggedIn">Signup</button>
+<button mat-button routerLink="/login" *ngIf="!isLoggedIn">Login</button>
+
+    <a mat-button routerLink="/users" *ngIf="isLoggedIn">Users</a>
+    <button mat-button color="warn" (click)="logout()" *ngIf="isLoggedIn">
+      Logout
+    </button>
+  </div>
+</nav>
