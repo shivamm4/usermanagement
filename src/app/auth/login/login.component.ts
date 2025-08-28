@@ -53,14 +53,15 @@ export class LoginComponent {
       next: (res: any) => {
         if (res && res.token) {
           this.authService.saveToken(res.token);
-          this.snackbar.open('✅ Login Successful!', 'Close', { duration: 3000 });
+          this.snackbar.open('Login Successful!', 'Close', { duration: 3000 });
           this.loginForm.reset();
           this.router.navigate(['/users']);
         }
         this.loading = false;
       },
       error: (err) => {
-        this.snackbar.open(`${err.error.error}`, 'Close', { duration: 3000 });
+        const errorMessage = err?.error?.error || ' Invalid credentials';
+        this.snackbar.open(errorMessage, 'Close', { duration: 3000 });
         this.loading = false;
       }
     });

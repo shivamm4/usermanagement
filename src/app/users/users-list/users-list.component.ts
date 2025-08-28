@@ -37,11 +37,11 @@ import { SnackbarService } from '../../ui/snackbar.service';
 export class UsersListComponent implements OnInit {
   users: User[] = [];
   dataSource = new MatTableDataSource<User>([]);
-  displayedColumns = ['avatar', 'name', 'email', 'actions'];
+  displayedColumns: string[] = ['avatar', 'name', 'email', 'actions'];
 
   q = '';
   page = 1;
-  pageSize = 3;   
+  pageSize = 3;
   totalUsers = 0;
 
   loading = false;
@@ -70,8 +70,8 @@ export class UsersListComponent implements OnInit {
         this.users = res.data || [];
         this.dataSource.data = this.users;
 
-        this.totalUsers = res.total; 
-        this.paginator.length = res.total;
+        this.totalUsers = res.total ?? this.users.length; 
+        this.paginator.length = this.totalUsers;
         this.paginator.pageSize = this.pageSize;
 
         setTimeout(() => {
@@ -79,7 +79,7 @@ export class UsersListComponent implements OnInit {
           this.dataSource.sort = this.sort;
         });
       },
-      error: () => this.snack.error('Failed to load users'),
+      error: () => this.snack.error(' Failed to load users'),
       complete: () => {
         this.loading = false;
         this.loadingSvc.hide();
@@ -108,19 +108,19 @@ export class UsersListComponent implements OnInit {
   }
 
   del(user: User): void {
-    if (!confirm('Delete this user?')) return;
+    if (!confirm(`Delete user ${user.first_name} ${user.last_name}?`)) return;
 
     this.api.delete(user.id!).subscribe({
       next: () => {
-        this.snack.success('User deleted successfully');
+        this.snack.success(' User deleted successfully');
         this.fetch();
       },
-      error: () => this.snack.error('Failed to delete user'),
+      error: () => this.snack.error(' Failed to delete user'),
     });
   }
 
   onPageChange(event: PageEvent): void {
-    this.page = event.pageIndex + 1; 
+    this.page = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.fetch();
   }

@@ -2,7 +2,7 @@
 body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#f6f8fb; }
 .container { padding: 20px; }
 
-/* dark mode */
+
 body.dark{ background:#0b1220; color:#e6eefc }
 body.dark .card, body.dark .mat-elevation-z2{ background:#121826; color:#e6eefc; }
 body.dark .nav{ background:#0b2340; }

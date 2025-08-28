@@ -9,23 +9,30 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
-  list(page = 1, perPage = 3): Observable<any> {
-    return this.http.get(`${this.api}/users?page=${page}&per_page=${perPage}`);
+  /** List users with pagination */
+  list(page = 1, perPage = 3): Observable<{ data: User[]; total: number }> {
+    return this.http.get<{ data: User[]; total: number }>(
+      `${this.api}/users?page=${page}&per_page=${perPage}`
+    );
   }
 
-  get(id: number): Observable<any> {
-    return this.http.get(`${this.api}/users/${id}`);
+  /** Get single user by ID */
+  get(id: number): Observable<{ data: User }> {
+    return this.http.get<{ data: User }>(`${this.api}/users/${id}`);
   }
 
-  createUser(payload: Partial<User>): Observable<any> {
-    return this.http.post(`${this.api}/users`, payload);
+  /** Create new user */
+  createUser(payload: Partial<User>): Observable<User> {
+    return this.http.post<User>(`${this.api}/users`, payload);
   }
 
-  updateUser(id: number, payload: Partial<User>): Observable<any> {
-    return this.http.put(`${this.api}/users/${id}`, payload);
+  /** Update existing user */
+  updateUser(id: number, payload: Partial<User>): Observable<User> {
+    return this.http.put<User>(`${this.api}/users/${id}`, payload);
   }
 
-  delete(id: number): Observable<any> {
-    return this.http.delete(`${this.api}/users/${id}`);
+  /** Delete user */
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.api}/users/${id}`);
   }
 }

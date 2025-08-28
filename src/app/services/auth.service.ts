@@ -1,34 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private signupUrl = 'https://reqres.in/api/register';
-  private loginUrl = 'https://reqres.in/api/login';
+  private signupUrl = 'https://reqres.in/api/register';  
+  private loginUrl = 'https://reqres.in/api/login';      
 
   constructor(private http: HttpClient) {}
 
-  signup(userData: { email: string; password: string }) {
-    if (userData.email !== 'eve.holt@reqres.in' || userData.password !== 'pistol') {
-      return throwError(() => ({ error: { error: ' invalid login and password ' } }));
-    }
-
-    const headers = new HttpHeaders({ 'x-api-key': 'reqres-free-v1' });
-    return this.http.post(this.signupUrl, userData, { headers });
+  // Signup
+  signup(userData: { email: string; password: string }): Observable<any> {
+    return this.http.post(this.signupUrl, userData);
   }
 
-  login(userData: { email: string; password: string }) {
-    if (userData.email !== 'eve.holt@reqres.in' || userData.password !== 'cityslicka') {
-      return throwError(() => ({ error: { error: ' Invalid login and Password' } }));
-    }
-
-    const headers = new HttpHeaders({ 'x-api-key': 'reqres-free-v1' });
-    return this.http.post(this.loginUrl, userData, { headers });
+  // Login (no manual checking, directly call API)
+  login(userData: { email: string; password: string }): Observable<any> {
+    return this.http.post(this.loginUrl, userData);
   }
 
+  // Token handling
   saveToken(token: string): void {
     localStorage.setItem('token', token);
   }

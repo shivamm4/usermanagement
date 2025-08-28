@@ -44,14 +44,14 @@ export class SignupComponent {
 
   onSubmit() {
     if (this.signupForm.invalid) {
-      this.snackbar.open('⚠️ Please fill all fields correctly!', 'Close', { duration: 3000 });
+      this.snackbar.open(' Please fill all fields correctly!', 'Close', { duration: 3000 });
       return;
     }
 
     this.loading = true;
     this.authService.signup(this.signupForm.value).subscribe({
       next: (res: any) => {
-        this.snackbar.open('✅ Signup Successful! Please login.', 'Close', { duration: 3000 });
+        this.snackbar.open('Signup Successful! Please login.', 'Close', { duration: 3000 });
         this.signupForm.reset();
         this.router.navigate(['/login']);
         this.loading = false;

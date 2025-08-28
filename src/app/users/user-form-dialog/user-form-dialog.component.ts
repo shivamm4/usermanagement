@@ -31,7 +31,7 @@ export class UserFormDialogComponent {
   constructor(
     private fb: FormBuilder,
     private api: UsersService,
-    public ref: MatDialogRef<UserFormDialogComponent>,   // ✅ public रखा
+    public ref: MatDialogRef<UserFormDialogComponent>,   
     @Inject(MAT_DIALOG_DATA) public data: User | null,
     private loading: LoadingService,
     private snack: SnackbarService

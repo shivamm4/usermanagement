@@ -6,7 +6,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
 
   let headersConfig: Record<string, string> = {
-    'x-api-key': 'reqres-free-v1'   // 🔑 Always send API key
+    'x-api-key': 'reqres-free-v1'
   };
 
   const token = authService.getToken();
